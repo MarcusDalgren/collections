@@ -3,6 +3,8 @@
 namespace Bonami\Collection;
 
 use ArrayIterator;
+use Bonami\Collection\Monoid\IntProductMonoid;
+use Bonami\Collection\Monoid\IntSumMonoid;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use stdClass;
@@ -329,6 +331,16 @@ class ArrayListTest extends TestCase {
 		$list = ArrayList::of(1, 2, 3);
 		$sum = $list->reduce(static function ($reduction, $value) { return $reduction + $value; }, 0);
 		$this->assertEquals(6, $sum);
+	}
+
+	public function testSum(): void {
+		$list = ArrayList::of(1, 2, 3, 4);
+		$this->assertEquals(10, $list->sum(new IntSumMonoid()));
+	}
+
+	public function testProduct(): void {
+		$list = ArrayList::of(1, 2, 3, 4);
+		$this->assertEquals(24, $list->sum(new IntProductMonoid()));
 	}
 
 	public function testMin(): void {

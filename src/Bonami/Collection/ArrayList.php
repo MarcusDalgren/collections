@@ -4,6 +4,7 @@ namespace Bonami\Collection;
 
 use ArrayIterator;
 use Bonami\Collection\Exception\NotImplementedException;
+use Bonami\Collection\Monoid\Monoid;
 use Countable;
 use IteratorAggregate;
 use JsonSerializable;
@@ -30,11 +31,15 @@ use function spl_object_hash;
 use function sprintf;
 use function usort;
 
+/**
+ * @template T
+ * @implements IteratorAggregate<int, T>
+ */
 class ArrayList implements Countable, IteratorAggregate, JsonSerializable {
 
 	use ApplicativeHelpers;
 
-	/** @var array */
+	/** @var array<T> */
 	protected $items;
 
 	public function __construct(array $items) {
@@ -569,6 +574,18 @@ class ArrayList implements Countable, IteratorAggregate, JsonSerializable {
 		return array_reduce(array_keys($this->items), function ($carry, $key) use ($reducer) {
 			return $reducer($carry, $this->items[$key], $key);
 		}, $initialReduction);
+	}
+
+	/**
+	 * Reduce list with monoid
+	 *
+	 * Complexity: o(n)
+	 *
+	 * @param Monoid<T> $monoid
+	 * @return T
+	 */
+	public function sum(Monoid $monoid) {
+		return $this->reduce($monoid->concat(), $monoid->getEmpty());
 	}
 
 	/**
