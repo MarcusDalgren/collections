@@ -12,7 +12,7 @@ use SplFixedArray;
 use Traversable;
 
 /**
- * @template T
+ * @phpstan-template T
  * @implements IteratorAggregate<int, T>
  */
 class LazyList implements IteratorAggregate {
@@ -179,7 +179,7 @@ class LazyList implements IteratorAggregate {
 	/**
 	 * Computes reduction of the elements of the collection.
 	 *
-	 * @template R
+	 * @phpstan-template R
 	 * @param callable(R, mixed): R $reducer a binary operation for reduction
 	 * @param R $initialReduction
 	 *
@@ -196,7 +196,7 @@ class LazyList implements IteratorAggregate {
 	/**
 	 * Computes a prefix scan (reduction) of the elements of the collection.
 	 *
-	 * @template R
+	 * @phpstan-template R
 	 * @param callable(R, mixed): R $scanner a binary operation for scan (reduction)
 	 * @param R $initialReduction
 	 *

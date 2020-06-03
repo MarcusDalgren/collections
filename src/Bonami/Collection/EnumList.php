@@ -3,7 +3,7 @@
 namespace Bonami\Collection;
 
 /**
- * @template T of Enum
+ * @phpstan-template T of Enum
  * @extends ArrayList<T>
  */
 class EnumList extends ArrayList {

@@ -11,7 +11,7 @@ use Throwable;
 use Traversable;
 
 /**
- * @template T
+ * @phpstan-template T
  * @implements IteratorAggregate<int, T>
  */
 abstract class TrySafe implements IHashable, IteratorAggregate {
@@ -110,7 +110,7 @@ abstract class TrySafe implements IHashable, IteratorAggregate {
 			}
 
 			/**
-			 * @template E
+			 * @phpstan-template E
 			 * @param E $else
 			 * @return T
 			 */
@@ -200,7 +200,7 @@ abstract class TrySafe implements IHashable, IteratorAggregate {
 			}
 
 			/**
-			 * @template E
+			 * @phpstan-template E
 			 * @param E $else
 			 * @return E
 			 */
@@ -259,7 +259,7 @@ abstract class TrySafe implements IHashable, IteratorAggregate {
 	abstract public function flatMap(callable $mapper): self;
 
 	/**
-	 * @template R
+	 * @phpstan-template R
 	 * @param callable(R, T): R $reducer
 	 * @param R $initialReduction
 	 *
@@ -300,7 +300,7 @@ abstract class TrySafe implements IHashable, IteratorAggregate {
 	abstract public function getUnsafe();
 
 	/**
-	 * @template E
+	 * @phpstan-template E
 	 * @param E $else
 	 * @return T|E
 	 */
@@ -317,8 +317,8 @@ abstract class TrySafe implements IHashable, IteratorAggregate {
 	abstract public function toOption(): Option;
 
 	/**
-	 * @template F
-	 * @template S
+	 * @phpstan-template F
+	 * @phpstan-template S
 	 * @param callable(Throwable): F $handleFailure
 	 * @param callable(T): S $handleSuccess
 	 *
