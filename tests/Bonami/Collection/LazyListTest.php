@@ -150,23 +150,23 @@ class LazyListTest extends TestCase
         $this->assertEquals(['1a', '2a', '1b', '2b'], $mapped->toArray());
     }
 
-    public function testTraverse(): void
+    public function testSequence(): void
     {
         $this->assertEquals(
             [ArrayList::of(1, 2)],
-            LazyList::traverse([LazyList::of(1), LazyList::of(2)])->toArray()
+            LazyList::sequence([LazyList::of(1), LazyList::of(2)])->toArray()
         );
         $this->assertEquals(
             [],
-            LazyList::traverse([LazyList::of(1), LazyList::fromEmpty()])->toArray()
+            LazyList::sequence([LazyList::of(1), LazyList::fromEmpty()])->toArray()
         );
         $this->assertEquals(
             [ArrayList::fromEmpty()],
-            LazyList::traverse([])->toArray()
+            LazyList::sequence([])->toArray()
         );
     }
 
-    public function testTraverseWithMultipleValues(): void
+    public function testSequenceWithMultipleValues(): void
     {
         $this->assertEquals(
             [
@@ -175,7 +175,7 @@ class LazyListTest extends TestCase
                 ArrayList::of(1, 'b'),
                 ArrayList::of(2, 'b'),
             ],
-            LazyList::traverse([LazyList::of(1, 2), LazyList::of('a', 'b')])->toArray()
+            LazyList::sequence([LazyList::of(1, 2), LazyList::of('a', 'b')])->toArray()
         );
     }
 

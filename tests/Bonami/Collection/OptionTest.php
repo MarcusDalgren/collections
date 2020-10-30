@@ -228,9 +228,9 @@ class OptionTest extends TestCase
 
         $emptyIterable = [];
 
-        self::assertEquals([42, 666], Option::traverse($iterable)->getUnsafe()->toArray());
-        self::assertEquals([], Option::traverse($emptyIterable)->getUnsafe()->toArray());
-        self::assertSame(Option::none(), Option::traverse($iterableWithNone));
+        self::assertEquals([42, 666], Option::sequence($iterable)->getUnsafe()->toArray());
+        self::assertEquals([], Option::sequence($emptyIterable)->getUnsafe()->toArray());
+        self::assertSame(Option::none(), Option::sequence($iterableWithNone));
 
         $numbersLowerThan10 = [1, 2, 3, 7, 9];
         self::assertEquals(
