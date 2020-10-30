@@ -160,9 +160,11 @@ class LazyListTest extends TestCase
             [],
             LazyList::sequence([LazyList::of(1), LazyList::fromEmpty()])->toArray()
         );
+        /** @phpstan-var array<LazyList<int>> $empty */
+        $empty = [];
         $this->assertEquals(
             [ArrayList::fromEmpty()],
-            LazyList::sequence([])->toArray()
+            LazyList::sequence($empty)->toArray()
         );
     }
 
