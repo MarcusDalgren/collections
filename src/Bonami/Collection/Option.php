@@ -17,8 +17,6 @@ use Traversable;
  */
 abstract class Option implements IHashable, IteratorAggregate
 {
-    use ApplicativeHelpers;
-
     /** @var self<T>|null */
     private static $none;
 
@@ -362,7 +360,9 @@ abstract class Option implements IHashable, IteratorAggregate
      */
     final public static function traverse(iterable $iterable, callable $mapperToApplicative): self
     {
-        $mapperToApplicative = $mapperToApplicative ?? static function ($a) { return $a; };
+        $mapperToApplicative = $mapperToApplicative ?? static function ($a) {
+            return $a;
+        };
         return LazyList::fromIterable($iterable)
             ->reduce(
                 function (self $reducedApplicative, $impureItem) use ($mapperToApplicative): self {
@@ -397,7 +397,9 @@ abstract class Option implements IHashable, IteratorAggregate
         /**
          * @phpstan-var callable(self<A>): self<A> $identity
          */
-        $identity = static function ($a) { return $a; };
+        $identity = static function ($a) {
+            return $a;
+        };
         return self::traverse($iterable, $identity);
     }
 }

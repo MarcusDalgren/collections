@@ -18,8 +18,6 @@ use Traversable;
  */
 abstract class TrySafe implements IHashable, IteratorAggregate
 {
-    use ApplicativeHelpers;
-
     /**
      * @param T $value
      * @return self<T>
@@ -395,7 +393,9 @@ abstract class TrySafe implements IHashable, IteratorAggregate
      */
     final public static function traverse(iterable $iterable, callable $mapperToApplicative): self
     {
-        $mapperToApplicative = $mapperToApplicative ?? static function ($a) { return $a; };
+        $mapperToApplicative = $mapperToApplicative ?? static function ($a) {
+            return $a;
+        };
         return LazyList::fromIterable($iterable)
             ->reduce(
                 function (self $reducedApplicative, $impureItem) use ($mapperToApplicative): self {
@@ -430,7 +430,9 @@ abstract class TrySafe implements IHashable, IteratorAggregate
         /**
          * @phpstan-var callable(self<A>): self<A> $identity
          */
-        $identity = static function ($a) { return $a; };
+        $identity = static function ($a) {
+            return $a;
+        };
         return self::traverse($iterable, $identity);
     }
 }
