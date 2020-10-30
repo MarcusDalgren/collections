@@ -410,7 +410,9 @@ class ArrayList implements Countable, IteratorAggregate, JsonSerializable
     {
         return $this
             ->map($mapper)
-            ->index(static function ($a) { return $a; })
+            ->index(static function ($a) {
+                return $a;
+            })
             ->values();
     }
 
@@ -472,7 +474,9 @@ class ArrayList implements Countable, IteratorAggregate, JsonSerializable
      */
     public function unique()
     {
-        return static::fromIterable($this->uniqueMap(static function ($a) { return $a; }));
+        return static::fromIterable($this->uniqueMap(static function ($a) {
+            return $a;
+        }));
     }
 
     /**
@@ -920,7 +924,9 @@ class ArrayList implements Countable, IteratorAggregate, JsonSerializable
      */
     public function intersect(iterable $items)
     {
-        $identity = static function ($a) { return $a; };
+        $identity = static function ($a) {
+            return $a;
+        };
         return static::fromIterable($this->index($identity)->getByKeys($items)->keys());
     }
 
@@ -1150,7 +1156,9 @@ class ArrayList implements Countable, IteratorAggregate, JsonSerializable
      */
     final public static function traverse(iterable $iterable, callable $mapperToApplicative): self
     {
-        $mapperToApplicative = $mapperToApplicative ?? static function ($a) { return $a; };
+        $mapperToApplicative = $mapperToApplicative ?? static function ($a) {
+            return $a;
+        };
         return LazyList::fromIterable($iterable)
             ->reduce(
                 function (self $reducedApplicative, $impureItem) use ($mapperToApplicative): self {
@@ -1185,7 +1193,9 @@ class ArrayList implements Countable, IteratorAggregate, JsonSerializable
         /**
          * @phpstan-var callable(self<A>): self<A> $identity
          */
-        $identity = static function ($a) { return $a; };
+        $identity = static function ($a) {
+            return $a;
+        };
         return self::traverse($iterable, $identity);
     }
 }
